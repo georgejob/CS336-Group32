@@ -12,6 +12,31 @@
         <title>Group32 Home</title>
     </head>
     <body>
-        <h1></h1>
+        <h1>Welcome to Group32's Final Project</h1>
+        <%
+            if ((session.getAttribute("user") == null)) {
+        %>
+            You are not logged in<br/>
+            <a href="login.jsp">Please Login</a>
+        <%} else {
+        %>
+            Welcome <%=session.getAttribute("user")%>! 
+            <a href='logout.jsp'>Log out</a><br/>
+            <p>What would you like to do?</p>
+            <ul>
+        <%
+            if (session.getAttribute("security_level").equals("admin")){
+        %>
+                <li><a href="admin.jsp">Admin Control Panel</a></li>
+        <%
+            }
+        %>
+                <li>View Profile Information</li>
+                <li>View Reservations</li>
+                <li>Search Flights</li>
+            </ul>
+        <%
+            }
+        %>
     </body>
 </html>
