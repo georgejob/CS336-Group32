@@ -13,10 +13,11 @@
    <body>
        <h1>Create an Account:</h1>
      <form action="addAccount.jsp" method="POST">
+       Name: <input type="text" name="fullname"/> <br/>
        Username: <input type="text" name="username"/> <br/>
        Password:<input type="password" name="password"/> <br/>
        <input type="submit" value="Submit"/>
      </form>
-       <p>Already have an account? <a href="index.jsp">Login</a></p>
+       <p>Already have an account? <a href="home.jsp">Login</a></p>
    </body>
 </html>
