@@ -29,6 +29,10 @@
         %>
                 <li><a href="admin.jsp">Admin Control Panel</a></li>
         <%
+            }else if(session.getAttribute("security_level").equals("rep")){
+        %>
+                <li><a href="rep.jsp">Customer Representative Control Panel</a></li>
+        <%
             }
         %>
                 <li>View Profile Information</li>
