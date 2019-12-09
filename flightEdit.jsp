@@ -40,6 +40,7 @@
         <%   
         }
 %>
+        <a href='logout.jsp'>Log out</a> -- <a href='home.jsp'>Return to Home</a>
         <p>Choose a different Flight:</p>
         <form action="flightEdit.jsp" method="POST">
             Flight Airline: <input type="text" name="lineid" maxlength="2"/>

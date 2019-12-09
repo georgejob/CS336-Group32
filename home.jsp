@@ -25,19 +25,22 @@
             <p>What would you like to do?</p>
             <ul>
         <%
-            if (session.getAttribute("security_level").equals("admin")){
+                if (session.getAttribute("security_level").equals("admin")){
         %>
                 <li><a href="admin.jsp">Admin Control Panel</a></li>
         <%
-            }else if(session.getAttribute("security_level").equals("rep")){
+                }else if(session.getAttribute("security_level").equals("rep")){
         %>
                 <li><a href="rep.jsp">Customer Representative Control Panel</a></li>
         <%
-            }
+                }else{
         %>
-                <li>View Profile Information</li>
                 <li>View Reservations</li>
                 <li>Search Flights</li>
+        <%
+                }
+        %>
+                <li>View Profile Information</li>
             </ul>
         <%
             }

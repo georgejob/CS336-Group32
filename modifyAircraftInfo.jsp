@@ -13,6 +13,8 @@
     String actionType = request.getParameter("action");   
     String craftid = request.getParameter("craftid");   
     String lineid = request.getParameter("lineid");
+    int firstSeats = Integer.parseInt(request.getParameter("firstseats"));
+    int econSeats = Integer.parseInt(request.getParameter("econseats"));
     //Make sure the JDBC driver is properly loaded
     Class.forName("com.mysql.jdbc.Driver");
     //Connect to the database
@@ -42,6 +44,10 @@
         rs = st.executeQuery("select * from Airlines where lid='" + lineid + "'");
         if(rs.next()){
             st.executeUpdate("INSERT INTO Aircraft VALUES ('" + craftid + "', '" + lineid + "');");
+            //Add seats to the aircraft
+            for(int i = 0; i < firstSeats + econSeats; i++){
+                st.executeUpdate("INSERT INTO Seats VALUES ('" + i + "', '" + craftid + "', '" + ((i < firstSeats) ? "first" : "economy") + "');");
+            }
             response.sendRedirect("aircraftEdit.jsp?craftid="+craftid+"&success=true");
         }else{
             out.println("Error: Airline " + lineid + " does not exist!");
