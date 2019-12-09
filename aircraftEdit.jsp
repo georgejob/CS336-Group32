@@ -39,6 +39,7 @@
         <%   
         }
 %>
+        <a href='logout.jsp'>Log out</a> -- <a href='home.jsp'>Return to Home</a>
         <p>Choose a different Aircraft:</p>
         <form action="aircraftEdit.jsp" method="POST">
             Aircraft Number: <input type="number" name="craftid"/>
@@ -52,7 +53,8 @@
         Connection con = DriverManager.getConnection("jdbc:mysql://cs336-group32.cbuttaegl5pc.us-east-1.rds.amazonaws.com:3306/FlightSystem","admin", "adminadmin");
         Statement st = con.createStatement();
         ResultSet rs;
-        //Get the user if the supplied username and password exist in the database
+        
+        //Get the provided aircraft
         rs = st.executeQuery("select * from Aircraft where cid='" + aircraftid + "'");
         if (rs.next()) {
 %>
@@ -61,11 +63,23 @@
             <input type="hidden" name="action" value="update"/>
             <input type="hidden" name="craftid" value="<%=rs.getString("cid")%>"/>
             Owned By Airline: <input type="text" name="lineid" value="<%=rs.getString("lid")%>" maxlength="2"/> <br/>
+        <%
+            //Get the number of each kind of seat for this database
+            int firstSeats;
+            int econSeats;
+            rs = st.executeQuery("select count(*) numSeats from Seats where cid='" + aircraftid + "' AND class='first';");
+            rs.next();
+            firstSeats = rs.getInt("numSeats");
+            rs = st.executeQuery("select count(*) numSeats from Seats where cid='" + aircraftid + "' AND class='economy';");
+            rs.next();
+            econSeats = rs.getInt("numSeats");
+        %>
+            <p>This aircraft has <%=firstSeats%> first class seats and <%=econSeats%> economy class seats</p>
             <input type="submit" value="Submit"/>
         </form>
         <form action="modifyAircraftInfo.jsp" method="POST">
             <input type="hidden" name="action" value="delete"/>
-            <input type="hidden" name="craftid" value="<%=rs.getString("cid")%>"/>
+            <input type="hidden" name="craftid" value="<%=aircraftid%>"/>
             <p style="color:red;">Delete all records for Aircraft Number <b><%=aircraftid%></b>:</p>
             <input type="submit" value="Delete"/>
         </form>
@@ -78,6 +92,8 @@
             <input type="hidden" name="action" value="create"/>
             Aircraft Number: <input type="number" name="craftid" value="<%=aircraftid%>"/><br/>
             Owned By Airline: <input type="text" name="lineid" maxlength="2"/> <br/>
+            Number of First-Class Seats: <input type="number" name="firstseats"/><br/>
+            Number of Economy Seats: <input type="number" name="econseats"/><br/>
             <input type="submit" value="Submit"/>
         </form>
 <%

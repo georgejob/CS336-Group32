@@ -39,6 +39,7 @@
         <%   
         }
 %>
+        <a href='logout.jsp'>Log out</a> -- <a href='home.jsp'>Return to Home</a>
         <p>Choose a different Airport:</p>
         <form action="airportEdit.jsp" method="POST">
             Airport ID: <input type="text" name="portid" maxlength="3"/>

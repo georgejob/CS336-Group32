@@ -39,6 +39,7 @@
         <%   
         }
 %>
+        <a href='logout.jsp'>Log out</a> -- <a href='home.jsp'>Return to Home</a>
         <p>Choose a different user:</p>
         <form action="userEdit.jsp" method="POST">
             Username: <input type="text" name="username"/> <br/>
